@@ -6,6 +6,7 @@ import BookDetail from './BookDetail'
 
 const BookList = (props) => {
     const [selected, setSelected] = useState(null)
+    const [showModal, setShowModal] = useState(false)
     return (
       <div>
           <ul id='book-list'>
@@ -14,13 +15,14 @@ const BookList = (props) => {
               props.data.books.map((book,index) => {
                 return <li key={book.id} onClick={() => {
                   setSelected(book.id)
-                }}> 
+                  setShowModal(true)
+                }} style={{cursor: 'pointer'}}> 
                   {book.name}
                 </li>
               })
             }
           </ul>
-          <BookDetail bookId={selected} />
+          {showModal && <BookDetail bookId={selected} setShow={setShowModal} /> }
       </div>
     );
   }

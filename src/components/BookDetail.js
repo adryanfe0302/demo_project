@@ -1,14 +1,12 @@
 import React from 'react'
 import { graphql } from 'react-apollo'
 import { getBookQuery } from './../queries/quries'
-
+import './BookDetail.css'
 
 const BookDetail = (props) => {
-   
-
     const displayBookDetails = () => {
         const { book } = props.data
-
+        console.log('props', props)
         if (book) {
             return <div>
                 <h2> {book.name} </h2>
@@ -29,8 +27,15 @@ const BookDetail = (props) => {
 
     return (
       <div>
-          <p>  The Book Details Goes here </p>
-          {displayBookDetails()}
+          <div id="myModal" className="modal">
+            <div className="modal-content">
+            <span className="close" onClick={() => {
+                props.setShow(false)
+            }}>&times;</span>
+                <p>  The Book Details Goes here </p>
+                    {displayBookDetails()}
+            </div>
+            </div>
       </div>
     );
   }
